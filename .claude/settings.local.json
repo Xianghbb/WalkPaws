@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch --all --prune:*)",
+      "Bash(.specify/scripts/powershell/create-new-feature.ps1:*)",
+      "Bash(git checkout -b 1-walkpaws-platform)",
+      "Bash(.specify/scripts/powershell/setup-plan.ps1:*)",
+      "Bash(.specify/scripts/powershell/check-prerequisites.ps1:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

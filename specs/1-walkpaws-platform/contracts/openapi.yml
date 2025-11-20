@@ -1,0 +1,1122 @@
+openapi: 3.0.3
+info:
+  title: WalkPaws Platform API
+  description: API for dog walking marketplace platform
+  version: 1.0.0
+  contact:
+    name: WalkPaws Support
+    email: support@walkpaws.com
+
+servers:
+  - url: https://api.walkpaws.com/v1
+    description: Production server
+  - url: https://staging-api.walkpaws.com/v1
+    description: Staging server
+
+security:
+  - bearerAuth: []
+
+paths:
+  # Authentication
+  /auth/register:
+    post:
+      summary: Register new user
+      tags: [Authentication]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /auth/login:
+    post:
+      summary: Login user
+      tags: [Authentication]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/verify-email:
+    post:
+      summary: Verify email address
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token]
+              properties:
+                token:
+                  type: string
+                  description: Email verification token
+      responses:
+        '200':
+          description: Email verified successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  # User Profile
+  /users/profile:
+    get:
+      summary: Get current user profile
+      tags: [Users]
+      responses:
+        '200':
+          description: User profile retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    put:
+      summary: Update user profile
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProfileRequest'
+      responses:
+        '200':
+          description: Profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /users/avatar:
+    post:
+      summary: Upload user avatar
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+                  description: Avatar image file
+      responses:
+        '200':
+          description: Avatar uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  avatar_url:
+                    type: string
+                    format: uri
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  # Pets
+  /pets:
+    get:
+      summary: Get user's pets
+      tags: [Pets]
+      responses:
+        '200':
+          description: Pets retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pet'
+
+    post:
+      summary: Add new pet
+      tags: [Pets]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePetRequest'
+      responses:
+        '201':
+          description: Pet created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /pets/{petId}:
+    parameters:
+      - name: petId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+
+    get:
+      summary: Get pet by ID
+      tags: [Pets]
+      responses:
+        '200':
+          description: Pet retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      summary: Update pet
+      tags: [Pets]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePetRequest'
+      responses:
+        '200':
+          description: Pet updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+    delete:
+      summary: Delete pet
+      tags: [Pets]
+      responses:
+        '204':
+          description: Pet deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Walkers
+  /walkers:
+    get:
+      summary: Browse available walkers
+      tags: [Walkers]
+      parameters:
+        - name: location
+          in: query
+          schema:
+            type: string
+          description: Location (city, state or zip)
+        - name: date
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Preferred date
+        - name: duration
+          in: query
+          schema:
+            type: string
+            enum: [15_min, 30_min, 45_min, 60_min]
+          description: Preferred walk duration
+        - name: radius
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+          description: Search radius in miles
+        - name: min_rating
+          in: query
+          schema:
+            type: number
+            minimum: 1
+            maximum: 5
+          description: Minimum rating filter
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+      responses:
+        '200':
+          description: Walkers retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  walkers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WalkerProfile'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+  /walkers/{walkerId}:
+    parameters:
+      - name: walkerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+
+    get:
+      summary: Get walker profile
+      tags: [Walkers]
+      responses:
+        '200':
+          description: Walker profile retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalkerProfile'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Bookings
+  /bookings:
+    get:
+      summary: Get user bookings
+      tags: [Bookings]
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, confirmed, in_progress, completed, cancelled]
+          description: Filter by booking status
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [owner, walker]
+          description: Filter by user role
+        - name: upcoming
+          in: query
+          schema:
+            type: boolean
+          description: Show only upcoming bookings
+      responses:
+        '200':
+          description: Bookings retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bookings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Booking'
+
+    post:
+      summary: Create booking request
+      tags: [Bookings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBookingRequest'
+      responses:
+        '201':
+          description: Booking created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /bookings/{bookingId}:
+    parameters:
+      - name: bookingId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+
+    get:
+      summary: Get booking details
+      tags: [Bookings]
+      responses:
+        '200':
+          description: Booking retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      summary: Update booking status
+      tags: [Bookings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBookingRequest'
+      responses:
+        '200':
+          description: Booking updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /bookings/{bookingId}/cancel:
+    parameters:
+      - name: bookingId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+
+    post:
+      summary: Cancel booking
+      tags: [Bookings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  maxLength: 500
+                  description: Cancellation reason
+      responses:
+        '200':
+          description: Booking cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  # Reviews
+  /bookings/{bookingId}/reviews:
+    parameters:
+      - name: bookingId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+
+    post:
+      summary: Create review for booking
+      tags: [Reviews]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReviewRequest'
+      responses:
+        '201':
+          description: Review created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  # Notifications
+  /notifications:
+    get:
+      summary: Get user notifications
+      tags: [Notifications]
+      parameters:
+        - name: unread
+          in: query
+          schema:
+            type: boolean
+          description: Show only unread notifications
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Notifications retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  notifications:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notification'
+
+    put:
+      summary: Mark notifications as read
+      tags: [Notifications]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                notification_ids:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+      responses:
+        '200':
+          description: Notifications marked as read
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    # Authentication
+    RegisterRequest:
+      type: object
+      required: [email, password, first_name, last_name, user_type]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+          pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$"
+        first_name:
+          type: string
+          minLength: 1
+          maxLength: 50
+        last_name:
+          type: string
+          minLength: 1
+          maxLength: 50
+        user_type:
+          type: string
+          enum: [owner, walker, both]
+        phone_number:
+          type: string
+          pattern: '^\\+1[0-9]{10}$'
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+
+    # Users
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone_number:
+          type: string
+        avatar_url:
+          type: string
+          format: uri
+        user_type:
+          type: string
+          enum: [owner, walker, both]
+        email_verified:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+
+    UserProfile:
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - type: object
+          properties:
+            address:
+              $ref: '#/components/schemas/Address'
+            average_rating:
+              type: number
+            total_reviews:
+              type: integer
+
+    UpdateProfileRequest:
+      type: object
+      properties:
+        first_name:
+          type: string
+          minLength: 1
+          maxLength: 50
+        last_name:
+          type: string
+          minLength: 1
+          maxLength: 50
+        phone_number:
+          type: string
+          pattern: '^\\+1[0-9]{10}$'
+        address:
+          $ref: '#/components/schemas/Address'
+
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        country:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+
+    # Pets
+    Pet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        breed:
+          type: string
+        age_years:
+          type: integer
+        age_months:
+          type: integer
+        weight_pounds:
+          type: integer
+        gender:
+          type: string
+          enum: [male, female]
+        is_spayed_neutered:
+          type: boolean
+        special_needs:
+          type: string
+        vaccination_status:
+          type: string
+          enum: [up_to_date, partial, none]
+        temperament:
+          type: string
+          enum: [calm, energetic, aggressive, shy, friendly]
+        walk_duration_preference:
+          type: string
+          enum: [15_min, 30_min, 45_min, 60_min]
+        photo_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+
+    CreatePetRequest:
+      type: object
+      required: [name, breed, age_years, weight_pounds, gender]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 50
+        breed:
+          type: string
+          minLength: 1
+          maxLength: 100
+        age_years:
+          type: integer
+          minimum: 0
+          maximum: 30
+        age_months:
+          type: integer
+          minimum: 0
+          maximum: 11
+        weight_pounds:
+          type: integer
+          minimum: 1
+          maximum: 300
+        gender:
+          type: string
+          enum: [male, female]
+        is_spayed_neutered:
+          type: boolean
+        special_needs:
+          type: string
+          maxLength: 500
+        vaccination_status:
+          type: string
+          enum: [up_to_date, partial, none]
+        temperament:
+          type: string
+          enum: [calm, energetic, aggressive, shy, friendly]
+        walk_duration_preference:
+          type: string
+          enum: [15_min, 30_min, 45_min, 60_min]
+
+    UpdatePetRequest:
+      allOf:
+        - $ref: '#/components/schemas/CreatePetRequest'
+        - type: object
+          properties:
+            is_active:
+              type: boolean
+
+    # Walkers
+    WalkerProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        bio:
+          type: string
+        experience_years:
+          type: integer
+        certifications:
+          type: array
+          items:
+            type: string
+        services_offered:
+          type: array
+          items:
+            type: string
+        base_price_15min:
+          type: number
+        base_price_30min:
+          type: number
+        base_price_45min:
+          type: number
+        base_price_60min:
+          type: number
+        radius_miles:
+          type: integer
+        transportation:
+          type: string
+          enum: [walk, bike, car, public]
+        background_check_status:
+          type: string
+          enum: [pending, approved, rejected]
+        average_rating:
+          type: number
+        total_walks:
+          type: integer
+        is_available:
+          type: boolean
+        document_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+
+    # Bookings
+    Booking:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        owner_id:
+          type: string
+          format: uuid
+        walker_id:
+          type: string
+          format: uuid
+        pet_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [pending, confirmed, in_progress, completed, cancelled, no_show]
+        scheduled_date:
+          type: string
+          format: date
+        scheduled_start_time:
+          type: string
+          format: time
+        duration:
+          type: string
+          enum: [15_min, 30_min, 45_min, 60_min]
+        special_instructions:
+          type: string
+        pickup_location:
+          type: string
+        dropoff_location:
+          type: string
+        price:
+          type: number
+        service_fee:
+          type: number
+        total_price:
+          type: number
+        recurrence_pattern:
+          type: string
+          enum: [once, weekly, bi_weekly, monthly]
+        recurrence_end_date:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+        confirmed_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+        cancelled_at:
+          type: string
+          format: date-time
+
+    CreateBookingRequest:
+      type: object
+      required: [pet_id, scheduled_date, scheduled_start_time, duration]
+      properties:
+        pet_id:
+          type: string
+          format: uuid
+        walker_id:
+          type: string
+          format: uuid
+        scheduled_date:
+          type: string
+          format: date
+        scheduled_start_time:
+          type: string
+          format: time
+        duration:
+          type: string
+          enum: [15_min, 30_min, 45_min, 60_min]
+        special_instructions:
+          type: string
+          maxLength: 500
+        pickup_location:
+          type: string
+        dropoff_location:
+          type: string
+        recurrence_pattern:
+          type: string
+          enum: [once, weekly, bi_weekly, monthly]
+        recurrence_end_date:
+          type: string
+          format: date
+
+    UpdateBookingRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [confirmed, in_progress, completed, cancelled, no_show]
+
+    # Reviews
+    Review:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        booking_id:
+          type: string
+          format: uuid
+        reviewer_id:
+          type: string
+          format: uuid
+        reviewee_id:
+          type: string
+          format: uuid
+        rating:
+          type: integer
+        comment:
+          type: string
+        punctuality_rating:
+          type: integer
+        communication_rating:
+          type: integer
+        care_rating:
+          type: integer
+        would_recommend:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+
+    CreateReviewRequest:
+      type: object
+      required: [booking_id, rating, would_recommend]
+      properties:
+        booking_id:
+          type: string
+          format: uuid
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+        comment:
+          type: string
+          maxLength: 1000
+        punctuality_rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+        communication_rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+        care_rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+        would_recommend:
+          type: boolean
+
+    # Notifications
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: [booking_requested, booking_confirmed, booking_cancelled, walk_started, walk_completed, review_received, payment_processed]
+        title:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+        is_read:
+          type: boolean
+        read_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+
+    # Common
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        total_pages:
+          type: integer
+        has_next:
+          type: boolean
+        has_prev:
+          type: boolean
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              details:
+                type: object
+
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+
+    Conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+
+tags:
+  - name: Authentication
+    description: User authentication endpoints
+  - name: Users
+    description: User profile management
+  - name: Pets
+    description: Pet management
+  - name: Walkers
+    description: Walker discovery and profiles
+  - name: Bookings
+    description: Booking management
+  - name: Reviews
+    description: Review system
+  - name: Notifications
+    description: Notification management
+
+x-tagGroups:
+  - name: Core Features
+    tags:
+      - Authentication
+      - Users
+      - Pets
+      - Walkers
+      - Bookings
+  - name: Supporting Features
+    tags:
+      - Reviews
+      - Notifications
+
+x-common-parameters:
+  - name: Authorization
+    in: header
+    required: true
+    schema:
+      type: string
+      pattern: '^Bearer .+'
+    description: Bearer token for authentication
+
+externalDocs:
+  description: Find out more about WalkPaws
+  url: https://walkpaws.com/docs/api
+
+x-logo:
+  url: https://walkpaws.com/logo.png
+  altText: WalkPaws logo
+
+x-code-samples:
+  - lang: 'JavaScript'
+    source: |
+      const response = await fetch('https://api.walkpaws.com/v1/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: 'user@example.com',
+          password: 'password123'
+        })
+      });
+
+      const data = await response.json();
+      console.log(data.access_token);
