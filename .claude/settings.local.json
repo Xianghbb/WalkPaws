@@ -6,7 +6,11 @@
       "Bash(git checkout -b 1-walkpaws-platform)",
       "Bash(.specify/scripts/powershell/setup-plan.ps1:*)",
       "Bash(.specify/scripts/powershell/check-prerequisites.ps1:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "mcp__filesystem__create_directory",
+      "mcp__figma__get_design_context",
+      "mcp__figma__get_screenshot",
+      "mcp__figma__get_metadata"
     ],
     "deny": [],
     "ask": []
