@@ -32,7 +32,7 @@ export default function FeatureSection() {
         {features.map((feature, index) => (
           <div
             key={index}
-            className="flex flex-1 flex-col gap-4 rounded-xl border border-black/5 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-background-dark"
+            className="flex flex-1 flex-col gap-4 rounded-xl border border-black/5 bg-gray-50 p-6 shadow-soft dark:border-white/10 dark:bg-background-dark"
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
               <span className="material-symbols-outlined">{feature.icon}</span>
