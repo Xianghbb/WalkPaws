@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WalkPaws - Trusted Dog Walkers in Adelaide</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#74D4C7",
+              "secondary": "#F9A889",
+              "background-light": "#F9F9F9",
+              "background-dark": "#101d22",
+              "text-light": "#333333",
+              "text-dark": "#F9F9F9",
+              "subtle-light": "#666666",
+              "subtle-dark": "#bbbbbb",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.75rem",
+              "lg": "1rem",
+              "xl": "1.5rem",
+              "full": "9999px"
+            },
+            boxShadow: {
+                'soft': '0 4px 12px 0 rgba(0, 0, 0, 0.05)',
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center">
+<div class="layout-content-container flex w-full flex-col">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap px-6 py-4 md:px-10 lg:px-20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">pets</span>
+<h2 class="text-xl font-bold tracking-tight">WalkPaws</h2>
+</div>
+<div class="hidden items-center gap-8 md:flex">
+<a class="text-sm font-medium hover:text-primary" href="#">About</a>
+<a class="text-sm font-medium hover:text-primary" href="#">Services</a>
+<a class="text-sm font-medium hover:text-primary" href="#">FAQ</a>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 text-sm font-bold leading-normal tracking-wide transition-colors bg-secondary/20 hover:bg-secondary/30 text-secondary-darker dark:text-secondary">
+<span class="truncate">Log In</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-wide transition-transform hover:scale-105">
+<span class="truncate">Sign Up</span>
+</button>
+</div>
+</header>
+<main class="w-full">
+<!-- HeroSection -->
+<div class="px-6 py-10 md:px-10 lg:px-20">
+<div class="@container">
+<div class="flex min-h-[500px] flex-col gap-6 rounded-xl bg-cover bg-center bg-no-repeat p-6 items-center justify-center text-center shadow-soft md:p-10" data-alt="A happy golden retriever sitting in a sunny park, looking at the camera." style='background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCpyoS6jIg6sTTVUyhMnXHzOv0ts7nvGr1y-Jl_46-O2JpVSJOYYYei96evzGOldV56LSGUEZlTU4nl1DJR8yYqSeobIegIudWGwgQve3_rxyxlfz8x86F-MmjWnEmfLaziadJZNo_BfQ6UEd4Jb-28md9oZPhjMaJhb8wKMKrgW2OIVUN1w8MnTiQY3hQX92N6XynDMZ42wfSbDnFiy3Pt2rsFVMxlOPo4KOJfKHgA8vfvZGoXwkWm8xgKF_WLnjXVSJyM1Jd-Kwg");'>
+<div class="flex max-w-2xl flex-col gap-4">
+<h1 class="text-white text-4xl font-black leading-tight tracking-tighter md:text-5xl lg:text-6xl">Find trusted dog walkers in Adelaide.</h1>
+<p class="text-white/90 text-base font-normal leading-normal md:text-lg">Connect with local, vetted walkers in your neighborhood for safe and happy walks.</p>
+</div>
+<div class="mt-4 flex w-full max-w-lg flex-col items-center gap-4 sm:flex-row">
+<label class="flex flex-col h-14 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-full h-full bg-background-light dark:bg-background-dark/80 backdrop-blur-sm shadow-soft">
+<div class="text-subtle-light dark:text-subtle-dark flex items-center justify-center pl-4">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden border-0 bg-transparent text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 h-full placeholder:text-subtle-light dark:placeholder:text-subtle-dark px-2 text-base font-normal leading-normal" placeholder="Enter your suburb..." value=""/>
+<div class="flex items-center justify-center pr-2">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-11 px-5 bg-primary text-white text-sm font-bold leading-normal tracking-wide transition-transform hover:scale-105">
+<span class="truncate">Find Walkers</span>
+</button>
+</div>
+</div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- FeatureSection -->
+<div class="flex flex-col gap-10 px-6 py-10 md:px-10 lg:px-20 @container">
+<div class="flex flex-col items-center gap-4 text-center">
+<h2 class="text-3xl font-bold tracking-tight md:text-4xl">Peace of mind with every walk</h2>
+<p class="text-subtle-light dark:text-subtle-dark max-w-2xl text-base font-normal leading-normal">We ensure every walker is reliable, experienced, and loves pets as much as you do.</p>
+</div>
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<div class="flex flex-1 flex-col gap-4 rounded-xl border border-black/5 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-background-dark">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">shield</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-lg font-bold">Safe &amp; Vetted</h3>
+<p class="text-subtle-light dark:text-subtle-dark text-sm font-normal leading-normal">Every walker on WalkPaws is background-checked and thoroughly vetted for your pet's safety.</p>
+</div>
+</div>
+<div class="flex flex-1 flex-col gap-4 rounded-xl border border-black/5 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-background-dark">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">map</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-lg font-bold">Truly Local</h3>
+<p class="text-subtle-light dark:text-subtle-dark text-sm font-normal leading-normal">Discover and connect with experienced dog walkers right in your own neighborhood.</p>
+</div>
+</div>
+<div class="flex flex-1 flex-col gap-4 rounded-xl border border-black/5 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-background-dark">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">star</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-lg font-bold">Trusted by Owners</h3>
+<p class="text-subtle-light dark:text-subtle-dark text-sm font-normal leading-normal">Join a community of happy pet owners who rely on our trusted, 5-star rated walkers.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="flex flex-col gap-8 border-t border-black/5 px-6 py-10 text-center dark:border-white/10 md:px-10 lg:px-20">
+<div class="grid grid-cols-2 gap-6 text-left sm:grid-cols-3 md:flex md:flex-wrap md:justify-center md:text-center">
+<a class="text-subtle-light dark:text-subtle-dark min-w-40 text-sm font-normal leading-normal hover:text-primary" href="#">About Us</a>
+<a class="text-subtle-light dark:text-subtle-dark min-w-40 text-sm font-normal leading-normal hover:text-primary" href="#">Careers</a>
+<a class="text-subtle-light dark:text-subtle-dark min-w-40 text-sm font-normal leading-normal hover:text-primary" href="#">Contact</a>
+<a class="text-subtle-light dark:text-subtle-dark min-w-40 text-sm font-normal leading-normal hover:text-primary" href="#">FAQ</a>
+<a class="text-subtle-light dark:text-subtle-dark min-w-40 text-sm font-normal leading-normal hover:text-primary" href="#">Terms of Service</a>
+<a class="text-subtle-light dark:text-subtle-dark min-w-40 text-sm font-normal leading-normal hover:text-primary" href="#">Privacy Policy</a>
+</div>
+<div class="flex justify-center gap-4">
+<a class="text-subtle-light dark:text-subtle-dark hover:text-primary" href="#">
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 012.752 2.752c.247.636.398 1.363.444 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.046 1.064-.197 1.791-.444 2.427a4.902 4.902 0 01-2.752 2.752c-.636.247-1.363.398-2.427.444-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.046-1.791-.197-2.427-.444a4.902 4.902 0 01-2.752-2.752c-.247-.636-.398-1.363-.444-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.046-1.064.197-1.791.444-2.427a4.902 4.902 0 012.752-2.752c.636-.247 1.363-.398 2.427-.444C9.531 2.013 9.885 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm5.25-9a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5z" fill-rule="evenodd"></path></svg>
+</a>
+<a class="text-subtle-light dark:text-subtle-dark hover:text-primary" href="#">
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path></svg>
+</a>
+<a class="text-subtle-light dark:text-subtle-dark hover:text-primary" href="#">
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg>
+</a>
+</div>
+<p class="text-subtle-light dark:text-subtle-dark text-sm font-normal leading-normal">© 2024 WalkPaws. All rights reserved.</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+</body></html>

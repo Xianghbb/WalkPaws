@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WalkPaws - Find a Trusted Dog Walker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4DB6AC",
+                        "background-light": "#FCFCFC",
+                        "background-dark": "#101d22",
+                        "secondary": "#F5E6CC",
+                        "accent": "#FFA07A",
+                        "text-light": "#333333",
+                        "text-dark": "#F5E6CC",
+                        "subtle-text-light": "#888888",
+                        "subtle-text-dark": "#b0b0b0",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1a2a32",
+                        "border-light": "#E0E0E0",
+                        "border-dark": "#3a4a52",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+<div class="relative flex min-h-screen w-full flex-col">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col w-full max-w-6xl flex-1">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark px-4 sm:px-6 py-4">
+<div class="flex items-center gap-3 text-text-light dark:text-text-dark">
+<div class="text-primary text-2xl">
+<span class="material-symbols-outlined" style="font-size: 32px; font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">WalkPaws</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium leading-normal text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary" href="#">Home</a>
+<a class="text-sm font-medium leading-normal text-primary dark:text-primary" href="#">Find a Walker</a>
+<a class="text-sm font-medium leading-normal text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary" href="#">My Bookings</a>
+</nav>
+<div class="flex flex-1 justify-end items-center gap-4">
+<button class="hidden sm:flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90">
+<span class="truncate">Login</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCoO6gKfNXhi4jZiaLxTMXQ9x2KAmMPzm_M2w6xwnjKc83W2YfU6Un1CaD6T4wAUcrjhQymYRn07bxcAo2sdKwQ4ZQV0XVC9M2-eiZQ53iwl93-5SIlB9tlywcUiRrzkT-GRiV2kj517kpIUBOl2TyGJhgT6HaXC1mB_gP3xC6BNvi2Nv8amFHJ-PUo3Sx3lux5wjzXM5HVIDoE_zFaaKztnkquwFWvuMFwnGicWtU8KijApV2XTXloGGe4hwkaP3rdQbCNUqr0VW0");'></div>
+</div>
+</header>
+<main class="flex flex-col gap-6 mt-8 px-4 sm:px-6">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between gap-3">
+<p class="text-4xl font-black leading-tight tracking-[-0.033em] text-text-light dark:text-text-dark">Find a Trusted Dog Walker in Adelaide</p>
+</div>
+<!-- SearchBar and Chips -->
+<div class="flex flex-col sm:flex-row gap-4 items-center">
+<div class="w-full sm:flex-grow">
+<label class="flex flex-col min-w-40 h-14 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark">
+<div class="text-subtle-text-light dark:text-subtle-text-dark flex items-center justify-center pl-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark px-4 pl-2 text-base font-normal leading-normal" placeholder="Search by suburb..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex gap-2 self-start sm:self-center overflow-x-auto w-full sm:w-auto pb-2">
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-card-dark border border-border-light dark:border-border-dark px-4 hover:bg-gray-50 dark:hover:bg-opacity-80">
+<p class="text-sm font-medium leading-normal text-text-light dark:text-text-dark">Sort by: Highest Rated</p>
+<span class="material-symbols-outlined text-subtle-text-light dark:text-subtle-text-dark text-xl">expand_more</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-card-dark border border-border-light dark:border-border-dark px-4 hover:bg-gray-50 dark:hover:bg-opacity-80">
+<p class="text-sm font-medium leading-normal text-text-light dark:text-text-dark">Availability</p>
+<span class="material-symbols-outlined text-subtle-text-light dark:text-subtle-text-dark text-xl">expand_more</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-card-dark border border-border-light dark:border-border-dark px-4 hover:bg-gray-50 dark:hover:bg-opacity-80">
+<p class="text-sm font-medium leading-normal text-text-light dark:text-text-dark">Price</p>
+<span class="material-symbols-outlined text-subtle-text-light dark:text-subtle-text-dark text-xl">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Walker Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-4">
+<!-- Card 1 -->
+<div class="flex flex-col gap-4 text-center p-6 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="w-24 h-24 bg-center bg-no-repeat aspect-square bg-cover rounded-full mx-auto" data-alt="Profile picture of Jane D." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDuYt3KJ4WfJ5taA0l6qAeJUd6cP-4qPHxD7LuscyPYRaRk2l3N1EwM7BTrTqrYABUDIL5PP5uGUDIlIutiCPBb5Aq1_z677Ae9bVO2uwT5h8C_5VEXFzSNM4Pejk73OLpyJKGH8bwAroBk_NNGUi3-199miD0BcTfqQYPgXATGjL3SJ777A3P1HXkbiRzNRBQpzZnbDZ5N7IxYNH7jlQotNdZzdfcvExA3T4BTpxZO4Kq8Sp92wGA_K8Lka7MfV43e1JXJnfkvAPY");'></div>
+<div class="flex flex-col gap-1">
+<p class="text-lg font-bold leading-normal text-text-light dark:text-text-dark">Jane D.</p>
+<p class="text-sm font-normal leading-normal text-subtle-text-light dark:text-subtle-text-dark">North Adelaide</p>
+<div class="flex items-center justify-center gap-1 mt-1 text-accent">
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star_half</span>
+<span class="text-subtle-text-light dark:text-subtle-text-dark text-sm ml-1">(4.9)</span>
+</div>
+<p class="text-base font-semibold leading-normal mt-2 text-text-light dark:text-text-dark">$25 / hr</p>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 mt-2">
+<span class="truncate">View Profile</span>
+</button>
+</div>
+<!-- Card 2 -->
+<div class="flex flex-col gap-4 text-center p-6 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="w-24 h-24 bg-center bg-no-repeat aspect-square bg-cover rounded-full mx-auto" data-alt="Profile picture of Mike S." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAAd8cQ1OxpuIVYOcLpUgfeRXb5PbbXRr8hqwSRXFxyhJsE4GMZdTDlqbqgMQnqhdameQUwC9Ap4yfrY93l6eDEEWF9hTHmlNWS9Kyjmr5_4P1chsu07_yeSA0YUpDdkaE6JLnORaf_S6A5RaioLoSx6w1f2UvIMTF-4MqcPJiJhEVZdOq17ks-x92hZd2idYBFDRqvbT90wvJDdTZTmo5-jZaZpOaSxBhZK1NBYot4SawcnxRzFQsMTZeQCqX-gAF2rYxhTlF-qbw");'></div>
+<div class="flex flex-col gap-1">
+<p class="text-lg font-bold leading-normal text-text-light dark:text-text-dark">Mike S.</p>
+<p class="text-sm font-normal leading-normal text-subtle-text-light dark:text-subtle-text-dark">Glenelg</p>
+<div class="flex items-center justify-center gap-1 mt-1 text-accent">
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-subtle-text-light dark:text-subtle-text-dark text-sm ml-1">(5.0)</span>
+</div>
+<p class="text-base font-semibold leading-normal mt-2 text-text-light dark:text-text-dark">$22 / hr</p>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 mt-2">
+<span class="truncate">View Profile</span>
+</button>
+</div>
+<!-- Card 3 -->
+<div class="flex flex-col gap-4 text-center p-6 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="w-24 h-24 bg-center bg-no-repeat aspect-square bg-cover rounded-full mx-auto" data-alt="Profile picture of Emily R." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCOs4snKsiQrbdygcxNxJKP7RoojTaXtwKkE2y1pq_b6qjqBfiqHFIKKEWXyoZcC_3gmqCMM5DdOEBkqBKGziEJiGVb_qmSOlrZQO-swurbXYgqFjnytVvcPEDl99_gLLnVhMROpoCF0Gadp_vFpZqX0-B_pxw_JEvIfGmlkJDv5dbhidU-iv7kA_LOYUqm5kYWGMWoW3ue0ogNDBkpsUentQ4cvzbI8Xfo2kzzkWyIqhUKDwA1taVfWijCEqSxXWQpJ70h3IBHBzM");'></div>
+<div class="flex flex-col gap-1">
+<p class="text-lg font-bold leading-normal text-text-light dark:text-text-dark">Emily R.</p>
+<p class="text-sm font-normal leading-normal text-subtle-text-light dark:text-subtle-text-dark">Norwood</p>
+<div class="flex items-center justify-center gap-1 mt-1 text-accent">
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px;">star</span>
+<span class="text-subtle-text-light dark:text-subtle-text-dark text-sm ml-1">(4.0)</span>
+</div>
+<p class="text-base font-semibold leading-normal mt-2 text-text-light dark:text-text-dark">$28 / hr</p>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 mt-2">
+<span class="truncate">View Profile</span>
+</button>
+</div>
+<!-- Card 4 -->
+<div class="flex flex-col gap-4 text-center p-6 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="w-24 h-24 bg-center bg-no-repeat aspect-square bg-cover rounded-full mx-auto" data-alt="Profile picture of David L." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBtsNwFKw1y0hpUBVIZL40vxa4MhwEd8yp_pw_I2PK-6U6p8IkttsNgUvgg8KWe3sqvBI3KvdpI_SWDpkX8O5tnj76HH8iGTYVtXW8z-B21l2-b_fIhiKZTbH4gA3me8YvSgjAV-GsFWIvbrjL1rx5orkYdGf035JDNDJj5OqK72g4Jjp0x--j006J8NuxOegdVYl24TUi92O_kjRFBL5cU93szADqDMA73daipXG3siT9Asnza-NGL5oqfAZBx6Kq94T6CsQbEZ7A");'></div>
+<div class="flex flex-col gap-1">
+<p class="text-lg font-bold leading-normal text-text-light dark:text-text-dark">David L.</p>
+<p class="text-sm font-normal leading-normal text-subtle-text-light dark:text-subtle-text-dark">Henley Beach</p>
+<div class="flex items-center justify-center gap-1 mt-1 text-accent">
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-subtle-text-light dark:text-subtle-text-dark text-sm ml-1">(5.0)</span>
+</div>
+<p class="text-base font-semibold leading-normal mt-2 text-text-light dark:text-text-dark">$24 / hr</p>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 mt-2">
+<span class="truncate">View Profile</span>
+</button>
+</div>
+</div>
+<!-- Loading State -->
+<div class="hidden flex-col items-center justify-center gap-4 text-center p-10 my-10 bg-card-light dark:bg-card-dark border border-dashed border-border-light dark:border-border-dark rounded-xl">
+<div class="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+<p class="text-lg font-semibold text-text-light dark:text-text-dark">Finding the best walkers for your pal...</p>
+<p class="text-subtle-text-light dark:text-subtle-text-dark">Please wait a moment.</p>
+</div>
+<!-- No Results State -->
+<div class="hidden flex flex-col items-center justify-center gap-4 text-center p-10 my-10 bg-card-light dark:bg-card-dark border border-dashed border-border-light dark:border-border-dark rounded-xl">
+<span class="material-symbols-outlined text-6xl text-primary">sentiment_dissatisfied</span>
+<p class="text-xl font-bold text-text-light dark:text-text-dark">Oops! No walkers match your search.</p>
+<p class="text-subtle-text-light dark:text-subtle-text-dark max-w-sm">There are currently no available walkers for this area. Try widening your search criteria to find more options.</p>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-accent text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 mt-4">
+<span class="truncate">Clear Filters</span>
+</button>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>
