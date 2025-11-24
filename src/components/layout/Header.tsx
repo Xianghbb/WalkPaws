@@ -1,46 +1,36 @@
-'use client'
-
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 export default function Header() {
-  const router = useRouter()
-
   return (
-    <header className="bg-white shadow-sm border-b">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-blue-600">
-              WalkPaws
-            </Link>
-          </div>
-          <nav className="flex space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-blue-600">
-              Home
-            </Link>
-            <Link href="/walkers" className="text-gray-700 hover:text-blue-600">
-              Find Walkers
-            </Link>
-            <Link href="/pets" className="text-gray-700 hover:text-blue-600">
-              My Pets
-            </Link>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <Link
-              href="/auth/login"
-              className="text-gray-700 hover:text-blue-600"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/auth/signup"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-            >
-              Sign Up
-            </Link>
-          </div>
-        </div>
+    <header className="flex items-center justify-between whitespace-nowrap px-6 py-4 md:px-10 lg:px-20">
+      <div className="flex items-center gap-3">
+        <span className="material-symbols-outlined text-primary text-3xl">pets</span>
+        <h2 className="text-xl font-bold tracking-tight">WalkPaws</h2>
+      </div>
+      <div className="hidden items-center gap-8 md:flex">
+        <Link href="#" className="text-sm font-medium hover:text-primary transition-colors">
+          About
+        </Link>
+        <Link href="#" className="text-sm font-medium hover:text-primary transition-colors">
+          Services
+        </Link>
+        <Link href="#" className="text-sm font-medium hover:text-primary transition-colors">
+          FAQ
+        </Link>
+      </div>
+      <div className="flex gap-3">
+        <Link
+          href="/auth/login"
+          className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 text-sm font-medium leading-normal tracking-wide transition-colors bg-white border border-gray-200 hover:bg-gray-50 text-gray-700"
+        >
+          <span className="truncate">Log In</span>
+        </Link>
+        <Link
+          href="/auth/signup"
+          className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-primary text-white text-sm font-medium leading-normal tracking-wide transition-transform hover:scale-105"
+        >
+          <span className="truncate">Sign Up</span>
+        </Link>
       </div>
     </header>
   )
