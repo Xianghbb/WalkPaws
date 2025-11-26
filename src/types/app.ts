@@ -6,6 +6,7 @@ export interface Pet {
   size: 'small' | 'medium' | 'large'
   special_instructions?: string
   owner_id: string
+  image_url?: string
   created_at: string
   updated_at: string
 }
